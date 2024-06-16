@@ -1,0 +1,24 @@
+- hosts: localhost
+  pre_tasks:
+    - name: Update system
+      become: yes
+      apt:
+        update_cache: true
+        upgrade: dist
+        state: present
+      tags:
+        - install
+        - core
+
+  tasks:
+    - name: Install Core Utilities
+      include_tasks:
+        file: tasks/core.yml
+
+    - name: Install ZSH
+      include_tasks:
+        file: tasks/zsh.yml
+
+    - name: Install GoLang
+      include_tasks:
+        file: tasks/golang.yml
